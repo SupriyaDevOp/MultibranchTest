@@ -13,7 +13,7 @@ pipeline {
                 echo 'Hello from Test,  This is common stage for all branches.'
             }
         }
-		stage('Not feature') {
+       stage('Not feature') {
 			when { 
 				not { 
 					//branch 'feature' 
@@ -26,14 +26,19 @@ pipeline {
                 echo 'This is common stage for all branches except feature branch.'
             }
         }
-        stage('Deliver for Release') {
-            when {
-                branch 'release'
-            }
+      stage('Deliver for Release') {
+			when { 
+				  
+					//branch 'feature' 
+					expression {
+						BRANCH_NAME ==~ /release\/[0-9]+\.[0-9]+\.[0-9]+\.[A-Z]+\.[a-z]+/
+					
+				}
+			}
             steps {
-                echo 'Hello from Release,  This is only for release branche.'
+                echo 'This is  stage for release '
             }
-        }
+	}
         stage('Deploy for Master') {
             when {
                 branch 'master'
