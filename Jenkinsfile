@@ -31,7 +31,7 @@ pipeline {
 				  
 					//branch 'feature' 
 					expression {
-						BRANCH_NAME ==~ /release\/[0-9]+\.[0-9]+\.[0-9]+\.[A-Z]+\.[a-z]+/
+						BRANCH_NAME ==~ /release\/w+$/
 					
 				}
 			}
