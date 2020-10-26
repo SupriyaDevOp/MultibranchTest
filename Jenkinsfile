@@ -15,12 +15,12 @@ pipeline {
         }
        stage('Not feature') {
 			when { 
-				not { 
+				//not { 
 					//branch 'feature' 
 					expression {
-						BRANCH_NAME ==~ /feature\/[0-9]+\.[0-9]+\.[0-9]+/
+						BRANCH_NAME ==~ /feature\/w+$/
 					}
-				}
+				//}
 			}
             steps {
                 echo 'This is common stage for all branches except feature branch.'
