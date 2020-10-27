@@ -31,7 +31,7 @@ pipeline {
                 branch 'release'
             }
             steps {
-                echo 'Hello from Release,  This is only for release branche.'
+                echo 'Hello from Release,  This is only for release branch.'
             }
         }
         stage('Deploy for Master') {
