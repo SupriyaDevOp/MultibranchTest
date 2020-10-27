@@ -6,21 +6,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Hello from Build, This is common stage for all branches.'
+				echo ${BRANCH_NAME}
             }
         }
         stage('Test') {
             steps {
                 echo 'Hello from Test,  This is common stage for all branches.'
+				echo ${BRANCH_NAME}
+				echo 'Test'
             }
         }
-       stage('Not feature') {
+       stage('feature') {
 			when { 
-				//not { 
 					//branch 'feature' 
 					expression {
-						BRANCH_NAME ==~ /feature\/w+$/
+						BRANCH_NAME ==~ ^(?:.*feature\/\w+).*$
 					}
-				//}
 			}
             steps {
                 echo 'This is common stage for all branches except feature branch.'
@@ -44,7 +45,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo 'Hello from Release,  This is only for release branche.'
+                echo 'Hello from Release,  This is only for release branch.'
             }
         }
     }
