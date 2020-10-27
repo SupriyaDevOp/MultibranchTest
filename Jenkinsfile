@@ -6,13 +6,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Hello from Build, This is common stage for all branches.'
-				echo ${BRANCH_NAME}
+				//echo ${BRANCH_NAME}
             }
         }
         stage('Test') {
             steps {
                 echo 'Hello from Test,  This is common stage for all branches.'
-				echo ${BRANCH_NAME}
+				//echo ${BRANCH_NAME}
 				echo 'Test'
             }
         }
