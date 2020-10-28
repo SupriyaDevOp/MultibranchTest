@@ -21,7 +21,10 @@ pipeline {
 					//branch 'feature' 
 					expression {
 						
-						env.BRANCH_NAME =~ /^(?:.feature\/\w+).$/
+						//env.BRANCH_NAME =~ /^(?:.feature\/\w+).$/
+						isFeature = (env.BRANCH_NAME ==~ /^(?:.*feature\/\w+).*$/)
+						echo "isFeature: ${isFeature}"
+						return isFeature
 					}
 			}
             steps {
