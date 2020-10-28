@@ -1,4 +1,3 @@
-//def branch_name = "${BRANCH_NAME}"
 pipeline {
     agent any
         
@@ -13,43 +12,42 @@ pipeline {
             steps {
                 echo 'Hello from Test,  This is common stage for all branches.'
 				echo "${env.BRANCH_NAME}"
-				echo 'Test'
             }
         }
-       stage('feature') {
-			when { 
-					//branch 'feature' 
+        stage('Feature') {
+			when {
 					expression {
-						
-						//env.BRANCH_NAME =~ /^(?:.feature\/\w+).$/
 						isFeature = (env.BRANCH_NAME ==~ /^(?:.*feature\/\w+).*$/)
 						echo "isFeature: ${isFeature}"
 						return isFeature
 					}
 			}
             steps {
-                echo 'This is common stage for all branches except feature branch.'
+                echo 'This is stage for feature branch.'
             }
         }
-      stage('Deliver for Release') {
-			when { 
-				  
-					//branch 'feature' 
+		stage('Release') {
+			when {
 					expression {
-						BRANCH_NAME ==~ /release\/w+$/
-					
-				}
+						isRelease = (env.BRANCH_NAME ==~ /^(?:.*release\/\w+).*$/)
+						echo "isRelease: ${isRelease}"
+						return isRelease
+					}
 			}
             steps {
-                echo 'This is  stage for release '
+                echo 'This is stage for release branch.'
             }
-	}
-        stage('Deploy for Master') {
+		}
+        stage('Master') {
             when {
-                branch 'master'
-            }
+					expression {
+						isMaster = (env.BRANCH_NAME ==~ /^(?:.*master\/\w+).*$/)
+						echo "isMaster: ${isMaster}"
+						return isMaster
+					}
+			}
             steps {
-                echo 'Hello from Release,  This is only for release branch.'
+                echo 'This is stage for Master branch.'
             }
         }
     }
