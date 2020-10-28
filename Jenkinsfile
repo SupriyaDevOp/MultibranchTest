@@ -20,7 +20,8 @@ pipeline {
 			when { 
 					//branch 'feature' 
 					expression {
-						BRANCH_NAME =~ /^(?:.feature\/\w+).$/
+						
+						env.BRANCH_NAME =~ /^(?:.feature\/\w+).$/
 					}
 			}
             steps {
